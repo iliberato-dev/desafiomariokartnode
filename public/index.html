@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Escolha seus pilotos e dispute uma corrida de Mario Kart."
+    />
+    <title>Mario Kart — Corrida de campeões</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="module" src="/js/main.js"></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Mario Kart, início">
+          <span class="brand-mark">MK</span>
+          <span class="brand-name">MARIO<span>KART</span></span>
+        </a>
+        <div class="game-status"><span class="status-dot"></span> MODO CORRIDA</div>
+      </header>
+
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span>01</span> · GRANDE PRÊMIO</p>
+          <h1 id="page-title">Prepare. Acelere.<br /><span>Vá para a pista.</span></h1>
+          <p class="hero-description">
+            Escolha dois pilotos e descubra quem chega primeiro à linha de chegada.
+          </p>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="sunburst"></div>
+          <img src="/docs/header.gif" alt="" />
+          <span class="hero-badge">★ &nbsp; 150 CC</span>
+        </div>
+        <div class="hero-stripe" aria-hidden="true"></div>
+      </section>
+
+      <section class="game-grid" aria-label="Painel da corrida">
+        <section class="panel drivers-panel" aria-labelledby="drivers-heading">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">MONTE SUA EQUIPE</p>
+              <h2 id="drivers-heading">Escolha os pilotos</h2>
+            </div>
+            <span class="heading-icon" aria-hidden="true">♟</span>
+          </div>
+
+          <div class="driver-selectors">
+            <article class="driver-card">
+              <div class="driver-card-top">
+                <span class="player-number">P1</span>
+                <span class="player-label">JOGADOR 1</span>
+              </div>
+              <label class="sr-only" for="player-one">Escolha o piloto do jogador 1</label>
+              <select id="player-one"></select>
+              <div class="driver-preview"></div>
+            </article>
+            <div class="versus" aria-label="contra">VS</div>
+            <article class="driver-card driver-card-green">
+              <div class="driver-card-top">
+                <span class="player-number">P2</span>
+                <span class="player-label">JOGADOR 2</span>
+              </div>
+              <label class="sr-only" for="player-two">Escolha o piloto do jogador 2</label>
+              <select id="player-two"></select>
+              <div class="driver-preview"></div>
+            </article>
+          </div>
+          <p class="selection-hint">Cada piloto tem atributos diferentes. Escolha sua estratégia!</p>
+        </section>
+
+        <section class="panel track-panel" aria-labelledby="track-heading">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">CIRCUITO ARCO-ÍRIS</p>
+              <h2 id="track-heading">A pista</h2>
+            </div>
+            <span class="lap-counter" id="lap-counter"></span>
+          </div>
+
+          <div class="track" aria-label="Progresso da corrida">
+            <div class="track-lane">
+              <span class="lane-name"></span>
+              <div class="lane-road">
+                <span class="lane-start"></span>
+                <span class="lane-finish" aria-hidden="true"></span>
+                <div class="kart-marker"><img src="" alt="" /></div>
+              </div>
+            </div>
+            <div class="track-lane">
+              <span class="lane-name"></span>
+              <div class="lane-road">
+                <span class="lane-start"></span>
+                <span class="lane-finish" aria-hidden="true"></span>
+                <div class="kart-marker"><img src="" alt="" /></div>
+              </div>
+            </div>
+            <div class="track-footer">
+              <span>LARGADA</span><span>CHEGADA</span>
+            </div>
+          </div>
+
+          <div class="round-result" id="round-result" aria-live="polite"></div>
+          <button class="race-button" id="race-button" type="button"></button>
+        </section>
+
+        <aside class="panel scoreboard-panel" aria-labelledby="scoreboard-heading">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">PLACAR AO VIVO</p>
+              <h2 id="scoreboard-heading">Pontuação</h2>
+            </div>
+            <span class="trophy-icon" aria-hidden="true">🏆</span>
+          </div>
+          <div class="scoreboard" id="scoreboard"></div>
+
+          <div class="race-feed">
+            <div class="feed-heading">
+              <h3>Últimas da pista</h3>
+              <span class="live-label"><span></span> AO VIVO</span>
+            </div>
+            <ol class="feed-list" id="feed-list" aria-live="polite"></ol>
+          </div>
+        </aside>
+      </section>
+
+      <footer class="page-footer">
+        <span>ACELERE COM RESPONSABILIDADE</span>
+        <span class="footer-checkers" aria-hidden="true"></span>
+        <span>QUE VENÇA O MELHOR!</span>
+      </footer>
+    </main>
+
+    <canvas class="confetti-canvas" id="confetti-canvas" aria-hidden="true"></canvas>
+    <div class="winner-overlay" id="winner-overlay" hidden>
+      <div
+        class="winner-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="winner-title"
+      >
+        <p class="eyebrow">LINHA DE CHEGADA</p>
+        <img id="winner-image" src="" alt="" />
+        <h2 id="winner-title"></h2>
+        <p id="winner-detail"></p>
+        <div class="winner-actions">
+          <button class="race-button" id="winner-again" type="button">
+            <span aria-hidden="true">↻</span> Correr de novo
+          </button>
+          <button class="secondary-button" id="winner-close" type="button">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
